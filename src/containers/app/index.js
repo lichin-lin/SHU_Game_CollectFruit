@@ -5,10 +5,10 @@ import About from '../about'
 
 const App = () => (
   <div>
-    <header>
+    {/* <header>
       <Link to="/">Home</Link>
       <Link to="/about-us">About</Link>
-    </header>
+    </header> */}
 
     <main>
       <Route exact path="/" component={Home} />
