@@ -4,12 +4,12 @@ import moment from 'moment'
 
 class EndState extends Phaser.State {
   init () {
-    this.score = 20 // arguments[0];
+    this.score = arguments[0]
   }
   async create () {
-    let bg = this.add.image(0, 0, 'bg');
-    bg.width = this.world.width;
-    bg.height = this.world.height;
+    let bg = this.add.image(0, 0, 'bg')
+    bg.width = this.world.width
+    bg.height = this.world.height
 
     let title = this.add.text(this.world.centerX, this.world.height * 0.25, 'game end', {
         fontSize: '40px',
