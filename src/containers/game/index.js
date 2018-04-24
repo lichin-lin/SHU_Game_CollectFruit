@@ -1,13 +1,12 @@
 import React from 'react'
 import Phaser from 'phaser-ce'
 import BootState from './BootState'
-import PreloaderState from './PreloaderState'
+import MenuState from './MenuState'
+import PlayState from './PlayState'
+import EndState from './EndState'
 
-let width = window.innerWidth;
-let height = window.innerHeight;
-// let images = ['bg', 'dude', 'green', 'red', 'yellow', 'bomb', 'five', 'three', 'one'];
-// let audios = ['bgMusic', 'scoreMusic', 'bombMusic'];
-// let game = new Phaser.Game(width, height, Phaser.AUTO, '#game')
+let width = window.innerWidth
+let height = window.innerHeight
 
 export default class gameContainer extends React.Component {
   state = {
@@ -17,8 +16,10 @@ export default class gameContainer extends React.Component {
     await this.setState({
       game: new Phaser.Game(width, height, Phaser.AUTO, '#game')
     })
-    this.state.game.state.add('BootState', BootState);
-    this.state.game.state.add('PreloaderState', PreloaderState);
+    this.state.game.state.add('BootState', BootState)
+    this.state.game.state.add('MenuState', MenuState)
+    this.state.game.state.add('PlayState', PlayState)
+    this.state.game.state.add('EndState', EndState)
     // start
     this.state.game.state.start('BootState')
   }

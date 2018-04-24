@@ -40,7 +40,7 @@ class BootState extends Phaser.State {
 
     function onLoad() {
       if (deadLine) {
-        this.state.start('PreloaderState')
+        this.state.start('MenuState')
       } else {
         setTimeout(onLoad, 1000)
       }
