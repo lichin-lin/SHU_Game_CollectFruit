@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+
 export const FB_LOGIN = 'firebase/FB_LOGIN'
 export const FB_LOGIN_SUCCESS = 'firebase/FB_LOGIN_SUCCESS'
 

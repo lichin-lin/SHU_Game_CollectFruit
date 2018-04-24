@@ -34,7 +34,7 @@ class BootState extends Phaser.State {
     this.load.onFileComplete.add(progress => progressText.text = progress + '%')
 
     this.load.onLoadComplete.add(onLoad, this)
-    // 最小展示时间，示例为3秒
+
     var deadLine = false
     setTimeout(() => { deadLine = true }, 100)
 

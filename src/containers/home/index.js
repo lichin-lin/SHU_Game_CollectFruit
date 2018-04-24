@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import firebase from 'firebase'
 import Game from './../game'
 
+import Cookies from 'universal-cookie'
+
 import {
   increment,
   incrementAsync,
@@ -42,12 +44,31 @@ class Home extends React.Component {
     user: null
   }
   componentWillMount () {
-    firebase.auth().getRedirectResult()
-    .then((result) => {
-      if (result.credential) { this.setState({user: result.user}) }
-    }).catch((error) => {
-      console.log(error)
-    })
+    const cookies = new Cookies()
+    let checkUser = cookies.get('user')
+
+    if (checkUser !== null && checkUser !== undefined) {
+      console.log('get data from cookie:', checkUser)
+    } else {
+      firebase.auth().getRedirectResult()
+      .then((result) => {
+        if (result.credential) {
+          console.log('get data from redirect')
+          let userInfo = {
+            data: result.user,
+            accessToken: result.credential.accessToken
+          }
+          this.setState({user: userInfo})
+
+          const date = new Date()
+          date.setHours(date.getHours() + 1)
+          const cookies = new Cookies()
+          cookies.set('user', userInfo, {expires: date})
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   }
   render () {
     let props = this.props
@@ -61,9 +82,7 @@ class Home extends React.Component {
           </p>
         */}
         {/* <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p> */}
-
         <p><button onClick={props.fblogin}>fb login</button></p>
-        <p><button onClick={() => props.sendRecord(props.count, this.state.user.uid)}>send!</button></p>
 
         <Game />
       </div>

@@ -16,18 +16,18 @@ class MenuState extends Phaser.State {
     bg.width = this.world.width
     bg.height = this.world.height
 
-    let title = this.add.text(this.world.centerX, this.world.height * 0.25, '我是伊莉莎白', {
+    let title = this.add.text(this.world.centerX, this.world.height * 0.25, '我是小焦', {
         fontSize: '40px',
         fontWeight: 'bold',
         fontfamily: 'Press Start 2P',
-        fill: '#EFAAC4'
+        fill: '#f2bb15'
     });
     title.anchor.setTo(0.5, 0.5)
 
     let remind = this.add.text(this.world.centerX, this.world.centerY, 'hey! 點擊任意位置開始', {
         fontSize: '20px',
         fontfamily: 'Press Start 2P',
-        fill: '#EFAAC4'
+        fill: '#f2bb15'
     });
     remind.anchor.setTo(0.5, 0.5)
 

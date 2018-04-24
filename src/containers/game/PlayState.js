@@ -75,7 +75,11 @@ class PlayState extends Phaser.State {
       apple.body.onWorldBounds.add((apple, up, down, left, right) => {
         if (down) {
           apple.kill()
-          if (apple.type !== 'bomb') this.state.start('EndState', true, false, this.score)
+          if (apple.type !== 'bomb') {
+            this.bgMusic.destroy()
+            this.cache.removeSound('bgMusic')
+            this.state.start('EndState', true, false, this.score)
+          }
         }
       })
     })

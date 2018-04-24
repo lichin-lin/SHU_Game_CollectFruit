@@ -2,6 +2,8 @@ import Phaser from 'phaser-ce'
 import firebase from 'firebase'
 import moment from 'moment'
 
+import Cookies from 'universal-cookie'
+
 class EndState extends Phaser.State {
   init () {
     this.score = arguments[0]
@@ -11,7 +13,7 @@ class EndState extends Phaser.State {
     bg.width = this.world.width
     bg.height = this.world.height
 
-    let title = this.add.text(this.world.centerX, this.world.height * 0.25, 'game end', {
+    let title = this.add.text(this.world.centerX, this.world.height * 0.25, '遊戲結束', {
         fontSize: '40px',
         fontWeight: 'bold',
         fill: '#f2bb15'
@@ -26,7 +28,7 @@ class EndState extends Phaser.State {
     })
     scoreText.anchor.setTo(0.5, 0.5)
 
-    let remind = this.add.text(this.world.centerX, this.world.height * 0.6, 'click anywhere', {
+    let remind = this.add.text(this.world.centerX, this.world.height * 0.6, '點擊螢幕已分享', {
         fontSize: '20px',
         fontWeight: 'bold',
         fill: '#f2bb15'
@@ -35,13 +37,25 @@ class EndState extends Phaser.State {
 
     let result = { score: this.score, time: moment().format('YYYY-MM-DD hh:mm:ss') }
     try {
-      let res = await firebase.database().ref(`/user/test`).push().set(result)
-      console.log(res)
+      const cookies = new Cookies()
+      let user = cookies.get('user')
+      if (user) {
+        let res = await firebase.database().ref(`/user/${user.uid}`).push().set(result)
+        console.log(res)
+      }
     } catch(err) {
       console.log(err)
     }
-
-    this.input.onTap.add(() => { this.state.start('MenuState') })
+    // onInputUp
+    this.input.onTap.add(() => {
+      let app_id = '167538313952622'
+      let page_type = 'page'
+      let url = 'https://lichin.me/'
+      let redirect_url = 'https://lichin.me/'
+      let quote = `我在世新大學畢展拿下了${this.score}分，換你們來挑戰了!`
+      window.open(`https://www.facebook.com/sharer/sharer.php?quote=${quote}&u=${url}`);
+      this.state.start('MenuState')
+    })
   }
 }
 
