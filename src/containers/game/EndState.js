@@ -40,7 +40,7 @@ class EndState extends Phaser.State {
       const cookies = new Cookies()
       let user = cookies.get('user')
       if (user) {
-        let res = await firebase.database().ref(`/user/${user.uid}`).push().set(result)
+        let res = await firebase.database().ref(`/user/${user.data.uid}`).push().set(result)
         console.log(res)
       }
     } catch(err) {
