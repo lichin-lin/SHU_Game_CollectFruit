@@ -19,6 +19,7 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
+  background: #e1fff0;
 
   flex-direction: column;
   justify-content: space-between;
@@ -55,7 +56,7 @@ const Body = styled.div`
     background-image: ${props => props.color}
     padding: 20px 25px;
 
-    border-color: white;
+    border-color: #e1fff0;
     border-radius: 50px;
     color: white;
     font-size: 16px;
