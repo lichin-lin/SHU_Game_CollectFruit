@@ -6,6 +6,12 @@ let images = ['bg', 'dude', 'green', 'red', 'yellow', 'bomb', 'five', 'three', '
 let audios = ['bgMusic', 'scoreMusic', 'bombMusic'];
 
 class BootState extends Phaser.State {
+  init () {
+    this.bgMusic = null
+    this.isState2 = false
+    this.isState3 = false
+    console.log('boot: ', this)
+  }
   preload() {
     this.input.maxPointers = 1;
     this.stage.disableVisibilityChange = true;

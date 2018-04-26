@@ -2,6 +2,9 @@ import Phaser from 'phaser-ce'
 import WebFont from 'webfontloader'
 
 class MenuState extends Phaser.State {
+  init () {
+    console.log('menu :', this)
+  }
   preload() {
     console.log('preloading...')
     WebFont.load({
