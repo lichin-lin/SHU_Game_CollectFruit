@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import ReactLoading from 'react-loading'
 
 import {
   fblogin
@@ -35,7 +36,7 @@ const Body = styled.div`
   align-items: center;
 
   h2 {
-    font-size: 70px;
+    font-size: 56px;
     margin: 0 0 10px 0;
     background-color: #89d8d3;
     background-image: ${props => props.color}
@@ -44,14 +45,14 @@ const Body = styled.div`
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 16px;
     background-color: #89d8d3;
     background-image: ${props => props.color}
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  button {
-    width: 100%;
+  > button {
+    width: 90%;
     background-color: #89d8d3;
     background-image: ${props => props.color}
     padding: 20px 25px;
@@ -59,31 +60,43 @@ const Body = styled.div`
     border-color: #e1fff0;
     border-radius: 50px;
     color: white;
-    font-size: 16px;
+    font-size: 20px;
     outline: none;
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
 
-const Seperator = styled.div`
-  width: 100%;
-  height: 5px;
-  background: pink;
-`
 const Footer = styled.img`
   width: 100%;
   height: auto;
 `
 class Login extends React.Component {
+  state = {
+    isLoading: false
+  }
+  onLogin = () => {
+    this.props.fblogin()
+  }
   render () {
     return (
       <Container>
         <Header></Header>
         <Body color={'linear-gradient(315deg, #f6fba2 0%, #20ded3 74%);'}>
-          <h2>一起認識水果們吧!</h2>
-          <button onClick={this.props.fblogin}>
-            使用 facebook 登入
+          <h2>豐狂接果乾</h2>
+          <button onClick={this.props.isLogin ? this.props.onStartGame : this.props.fblogin}>
+            {
+              this.state.isLoading ? (
+                <ReactLoading type={'spin'} color={'white'} height={30} width={30} />
+              ) : (
+                this.props.isLogin ? `開始遊戲` : `使用 facebook 登入`
+              )
+            }
           </button>
-          <h3>#世新大學 #公共關係</h3>
+          <h3>{this.props.isLogin ? `#2018世新公廣展 #MooJu目啾整合行銷` : ``}</h3>
         </Body>
         <Footer src={require('./../../assets/images/footer.png')}/>
       </Container>

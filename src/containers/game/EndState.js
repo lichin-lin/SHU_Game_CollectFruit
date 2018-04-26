@@ -1,14 +1,34 @@
 import Phaser from 'phaser-ce'
 import firebase from 'firebase'
 import moment from 'moment'
+import _ from 'lodash'
 
 import Cookies from 'universal-cookie'
 
 class EndState extends Phaser.State {
   init () {
+    // this round score
     this.score = arguments[0]
+    this.scoreBoard = []
+  }
+  preload () {
+    console.log(this.scoreBoard)
   }
   async create () {
+    // all user score
+    let scoreList = await firebase.database().ref(`/user/`).once('value').then((snapshot) => {
+      return snapshot.val()
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code)
+    })
+
+    _.map(scoreList, (user, id) => {
+      _.map(user, (d) => {
+        this.scoreBoard.push({score: d.score, name: id})
+      })
+    })
+    this.scoreBoard = _.sortBy(this.scoreBoard, (d) => d.score).reverse().slice(0, 5)
+
     let bg = this.add.image(0, 0, 'bg')
     bg.width = this.world.width
     bg.height = this.world.height
@@ -28,19 +48,28 @@ class EndState extends Phaser.State {
     })
     scoreText.anchor.setTo(0.5, 0.5)
 
-    let remind = this.add.text(this.world.centerX, this.world.height * 0.6, '點擊螢幕已分享', {
+    let remind = this.add.text(this.world.centerX, this.world.height * 0.45, '點擊螢幕以分享', {
         fontSize: '20px',
         fontWeight: 'bold',
         fill: '#f2bb15'
     })
     remind.anchor.setTo(0.5, 0.5)
 
+    this.scoreBoard.map((data, i) => {
+      let record = this.add.text(this.world.centerX, this.world.height * 0.6, `${i+1}. ${data.score} - ${data.name}`, {
+          fontSize: '16px',
+          fontWeight: 'bold',
+          fill: '#f2bb15'
+      })
+      record.anchor.setTo(0.5, 0.5 - i)
+    })
+
     let result = { score: this.score, time: moment().format('YYYY-MM-DD hh:mm:ss') }
     try {
       const cookies = new Cookies()
       let user = cookies.get('user')
       if (user) {
-        let res = await firebase.database().ref(`/user/${user.data.uid}`).push().set(result)
+        let res = await firebase.database().ref(`/user/${user.data.displayName}`).push().set(result)
         console.log(res)
       }
     } catch(err) {
@@ -48,12 +77,9 @@ class EndState extends Phaser.State {
     }
     // onInputUp
     this.input.onTap.add(() => {
-      let app_id = '167538313952622'
-      let page_type = 'page'
-      let url = 'https://lichin.me/'
-      let redirect_url = 'https://lichin.me/'
-      let quote = `我在世新大學畢展拿下了${this.score}分，換你們來挑戰了!`
-      window.open(`https://www.facebook.com/sharer/sharer.php?quote=${quote}&u=${url}`);
+      let url = 'https://2018shupradmooju.surge.sh'
+      let quote = `我在 2018 世新公廣畢展豐年號展間拿下了 ${this.score} 分，換你來挑戰!`
+      window.open(`https://www.facebook.com/sharer/sharer.php?quote=${quote}&u=${url}`)
       this.state.start('MenuState')
     })
   }

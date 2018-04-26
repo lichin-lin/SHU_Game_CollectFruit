@@ -16,7 +16,7 @@ class MenuState extends Phaser.State {
     bg.width = this.world.width
     bg.height = this.world.height
 
-    let title = this.add.text(this.world.centerX, this.world.height * 0.25, '我是小焦', {
+    let title = this.add.text(this.world.centerX, this.world.height * 0.25, '我是豐兒', {
         fontSize: '40px',
         fontWeight: 'bold',
         fontfamily: 'Press Start 2P',

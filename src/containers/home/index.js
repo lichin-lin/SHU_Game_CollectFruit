@@ -7,14 +7,24 @@ import Cookies from 'universal-cookie'
 
 export default class Home extends React.Component {
   state = {
-    user: null
+    user: null,
+    isLogin: false,
+    startGame: false
   }
+  onStartGame = () => {
+    this.setState({startGame: true})
+  }
+
   componentWillMount () {
     const cookies = new Cookies()
     let checkUser = cookies.get('user')
 
     if (checkUser !== null && checkUser !== undefined) {
-      this.setState({user: checkUser})
+      let userInfo = {
+        data: checkUser.user,
+        accessToken: checkUser.accessToken
+      }
+      this.setState({user: userInfo, isLogin: true})
     } else {
       firebase.auth().getRedirectResult()
       .then((result) => {
@@ -23,7 +33,7 @@ export default class Home extends React.Component {
             data: result.user,
             accessToken: result.credential.accessToken
           }
-          this.setState({user: userInfo})
+          this.setState({user: userInfo, isLogin: true})
 
           const date = new Date()
           date.setHours(date.getHours() + 1)
@@ -34,11 +44,11 @@ export default class Home extends React.Component {
       })
     }
   }
+
   render () {
     return (
       <div>
-        { this.state.user === null ? <Login/> : <Game /> }
-        {/* <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p> */}
+        { !this.state.startGame ? <Login isLogin={this.state.isLogin} onStartGame={this.onStartGame}/> : <Game /> }
       </div>
     )
   }

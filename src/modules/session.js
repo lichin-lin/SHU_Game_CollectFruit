@@ -30,7 +30,6 @@ export const fblogin = () => {
     dispatch({
       type: FB_LOGIN
     })
-
     let provider = new firebase.auth.FacebookAuthProvider();
     return firebase.auth().signInWithRedirect(provider)
       .then(user => loginUserSuccess(dispatch, user))
