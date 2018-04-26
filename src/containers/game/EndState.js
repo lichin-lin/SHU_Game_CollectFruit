@@ -7,12 +7,8 @@ import Cookies from 'universal-cookie'
 
 class EndState extends Phaser.State {
   init () {
-    // this round score
     this.score = arguments[0]
     this.scoreBoard = []
-  }
-  preload () {
-    console.log(this.scoreBoard)
   }
   async create () {
     // your score

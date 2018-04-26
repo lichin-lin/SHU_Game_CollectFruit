@@ -44,8 +44,6 @@ class PlayState extends Phaser.State {
     this.title.anchor.setTo(0.5, 0.5)
 
     let touching = false
-    let appleTypes = ['green', 'red', 'yellow', 'bomb']
-
     this.input.onDown.add((pointer) => {
       if (Math.abs(pointer.x - this.man.x) < this.man.width / 2) touching = true
     })
@@ -57,39 +55,56 @@ class PlayState extends Phaser.State {
     })
 
     this.apples = this.add.group()
-    let appleTimer = this.time.create(true)
-    appleTimer.loop(1000, () => {
-      let x = Math.random() * this.world.width
-      let index = Math.floor(Math.random() * appleTypes.length)
-      let type = appleTypes[index]
-      let apple = this.apples.create(x, 0, type)
-      apple.type = type
-
-      this.physics.enable(apple)
-      let appleImg = this.cache.getImage(type)
-      apple.width = this.world.width / 8
-      apple.height = apple.width / appleImg.width * appleImg.height
-
-      apple.body.collideWorldBounds = true
-      apple.body.onWorldBounds = new Phaser.Signal()
-      apple.body.onWorldBounds.add((apple, up, down, left, right) => {
-        if (down) {
-          apple.kill()
-          if (apple.type !== 'bomb') {
-            this.bgMusic.destroy()
-            this.cache.removeSound('bgMusic')
-            this.state.start('EndState', true, false, this.score)
-          }
-        }
-      })
+    this.appleTimer = this.time.create(true)
+    this.appleTimer.loop(1000, () => {
+      this.objFalling()
     })
-    appleTimer.start()
+    this.appleTimer.start()
   }
 
   update () {
     this.physics.arcade.overlap(this.man, this.apples, this.pickApple, null, this)
+    this.physics.arcade.gravity.y = this.score > 20 ? this.score * 30 : 300
+    if (this.score > 20 && !this.isState2) {
+      this.appleTimer.destroy()
+      this.appleTimer = this.time.create(true)
+      this.appleTimer.loop(600, this.objFalling)
+      this.appleTimer.start()
+      this.isState2 = true
+    } else if (this.score > 50 && this.isState2 && !this.isState3) {
+      this.appleTimer.destroy()
+      this.appleTimer = this.time.create(true)
+      this.appleTimer.loop(300, this.objFalling)
+      this.appleTimer.start()
+      this.isState3 = true
+    }
   }
+  objFalling = () => {
+    let appleTypes = ['green', 'red', 'yellow', 'bomb']
+    let x = Math.random() * this.world.width
+    let index = Math.floor(Math.random() * appleTypes.length)
+    let type = appleTypes[index]
+    let apple = this.apples.create(x, 0, type)
+    apple.type = type
 
+    this.physics.enable(apple)
+    let appleImg = this.cache.getImage(type)
+    apple.width = this.world.width / 8
+    apple.height = apple.width / appleImg.width * appleImg.height
+
+    apple.body.collideWorldBounds = true
+    apple.body.onWorldBounds = new Phaser.Signal()
+    apple.body.onWorldBounds.add((apple, up, down, left, right) => {
+      if (down) {
+        apple.kill()
+        if (apple.type !== 'bomb') {
+          this.bgMusic.destroy()
+          this.cache.removeSound('bgMusic')
+          this.state.start('EndState', true, false, this.score)
+        }
+      }
+    })
+  }
   pickApple = (man, apple) => {
     if (apple.type === 'bomb') {
       this.bombMusic.play()
