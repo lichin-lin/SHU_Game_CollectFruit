@@ -115,7 +115,7 @@ class PlayState extends Phaser.State {
       this.state.start('EndState', true, false, this.score)
     } else {
       let point = apple.type === 'yellow' ? 5 : (apple.type === 'red' ? 3 : 1)
-      let img = apple.type === 'five' ? 5 : (apple.type === 'three' ? 3 : 'one')
+      let img = apple.type === 'five' ? 'five' : (apple.type === 'three' ? 'three' : 'one')
 
       let goal = this.add.image(apple.x, apple.y, img)
       let goalImg = this.cache.getImage(img)
