@@ -1,4 +1,5 @@
 import Phaser from 'phaser-ce'
+import WebFont from 'webfontloader'
 
 let gameWidth = window.innerWidth;
 let gameHeight = window.innerHeight;
@@ -13,6 +14,11 @@ class BootState extends Phaser.State {
     this.isState4 = false
   }
   preload() {
+    WebFont.load({
+      google: {
+        families: ['Press Start 2P']
+      }
+    })
     this.input.maxPointers = 1;
     this.stage.disableVisibilityChange = true;
 
