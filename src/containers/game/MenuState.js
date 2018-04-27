@@ -3,7 +3,6 @@ import WebFont from 'webfontloader'
 
 class MenuState extends Phaser.State {
   init () {
-    console.log('menu :', this)
   }
   preload() {
     console.log('preloading...')
@@ -27,7 +26,7 @@ class MenuState extends Phaser.State {
     });
     title.anchor.setTo(0.5, 0.5)
 
-    let remind = this.add.text(this.world.centerX, this.world.centerY, 'hey! 點擊任意位置開始', {
+    let remind = this.add.text(this.world.centerX, this.world.centerY, 'hey!', {
         fontSize: '20px',
         fontfamily: 'Press Start 2P',
         fill: '#f2bb15'

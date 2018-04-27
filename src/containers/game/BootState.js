@@ -10,7 +10,7 @@ class BootState extends Phaser.State {
     this.bgMusic = null
     this.isState2 = false
     this.isState3 = false
-    console.log('boot: ', this)
+    this.isState4 = false
   }
   preload() {
     this.input.maxPointers = 1;

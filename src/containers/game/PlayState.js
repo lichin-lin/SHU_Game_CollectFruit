@@ -12,7 +12,7 @@ class PlayState extends Phaser.State {
     this.bgMusic = null
     this.isState2 = false
     this.isState3 = false
-    console.log('play: ', this)
+    this.isState4 = false
   }
 
   create () {
@@ -20,7 +20,6 @@ class PlayState extends Phaser.State {
     this.physics.startSystem(Phaser.Physics.Arcade)
     this.physics.arcade.gravity.y = 300
 
-    console.log(this.bgMusic);
     if (!this.bgMusic) {
       this.bgMusic = this.add.audio('bgMusic')
       this.bgMusic.loopFull()
@@ -78,9 +77,15 @@ class PlayState extends Phaser.State {
     } else if (this.score > 50 && this.isState2 && !this.isState3) {
       this.appleTimer.destroy()
       this.appleTimer = this.time.create(true)
-      this.appleTimer.loop(300, this.objFalling)
+      this.appleTimer.loop(400, this.objFalling)
       this.appleTimer.start()
       this.isState3 = true
+    } else if (this.score > 100 && this.isState2 && this.isState3 && !this.isState4) {
+      this.appleTimer.destroy()
+      this.appleTimer = this.time.create(true)
+      this.appleTimer.loop(300, this.objFalling)
+      this.appleTimer.start()
+      this.isState4 = true
     }
   }
   objFalling = () => {
