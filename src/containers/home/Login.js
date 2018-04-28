@@ -76,7 +76,7 @@ const Footer = styled.img`
 `
 class Login extends React.Component {
   state = {
-    isLoading: false
+    // isLoading: false
   }
   onLogin = () => {
     this.props.fblogin()
@@ -89,7 +89,7 @@ class Login extends React.Component {
           <h2>豐狂接果乾</h2>
           <button onClick={this.props.isLogin ? this.props.onStartGame : this.props.fblogin}>
             {
-              this.state.isLoading ? (
+              this.props.isLoading ? (
                 <ReactLoading type={'spin'} color={'white'} height={30} width={30} />
               ) : (
                 this.props.isLogin ? `開始遊戲` : `使用 facebook 登入`

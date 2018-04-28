@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie'
 export default class Home extends React.Component {
   state = {
     user: null,
+    isLoading: true,
     isLogin: false,
     startGame: false
   }
@@ -25,6 +26,7 @@ export default class Home extends React.Component {
         accessToken: checkUser.accessToken
       }
       this.setState({user: userInfo, isLogin: true})
+      this.setState({isLoading: false})
     } else {
       firebase.auth().getRedirectResult()
       .then((result) => {
@@ -39,6 +41,7 @@ export default class Home extends React.Component {
           date.setHours(date.getHours() + 1)
           cookies.set('user', userInfo, {expires: date})
         }
+        this.setState({isLoading: false})
       }).catch((error) => {
         console.log(error)
       })
@@ -48,7 +51,7 @@ export default class Home extends React.Component {
   render () {
     return (
       <div>
-        { !this.state.startGame ? <Login isLogin={this.state.isLogin} onStartGame={this.onStartGame}/> : <Game /> }
+        { !this.state.startGame ? <Login isLoading={this.state.isLoading} isLogin={this.state.isLogin} onStartGame={this.onStartGame}/> : <Game /> }
       </div>
     )
   }
