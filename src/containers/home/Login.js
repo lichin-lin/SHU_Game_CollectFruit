@@ -87,7 +87,7 @@ class Login extends React.Component {
         <Header></Header>
         <Body color={'linear-gradient(315deg, #f6fba2 0%, #20ded3 74%);'}>
           <h2>豐狂接果乾</h2>
-          <button onClick={this.props.isLogin ? this.props.onStartGame : this.props.fblogin}>
+          <button onClick={this.props.isLogin ? this.props.onSwipe : this.props.fblogin}>
             {
               this.props.isLoading ? (
                 <ReactLoading type={'spin'} color={'white'} height={30} width={30} />

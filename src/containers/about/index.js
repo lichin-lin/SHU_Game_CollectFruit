@@ -1,8 +1,12 @@
 import React from 'react'
+import Game from './../game'
 
-export default () => (
-  <div>
-    <h1>About Us</h1>
-    <p>Hello Medium!</p>
-  </div>
-)
+export default class About extends React.Component {
+  componentWillMount () {}
+
+  render () {
+    return (
+      <Game />
+    )
+  }
+}

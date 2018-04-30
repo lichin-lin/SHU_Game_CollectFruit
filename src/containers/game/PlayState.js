@@ -31,7 +31,7 @@ class PlayState extends Phaser.State {
     bg.width = this.world.width
     bg.height = this.world.height
 
-    this.man = this.add.sprite(this.world.centerX, this.world.height * 0.9, 'dude')
+    this.man = this.add.sprite(this.world.centerX, this.world.height * 0.86, 'dude')
     let manImage = this.cache.getImage('dude')
     this.man.width = this.world.width * 0.2
     this.man.height = this.man.width / manImage.width * manImage.height
@@ -89,7 +89,7 @@ class PlayState extends Phaser.State {
     }
   }
   objFalling = () => {
-    let appleTypes = ['green', 'red', 'yellow', 'bomb']
+    let appleTypes = ['green', 'red', 'yellow', 'special1', 'special2', 'bomb', 'bomb2']
     let x = Math.random() * this.world.width
     let index = Math.floor(Math.random() * appleTypes.length)
     let type = appleTypes[index]
@@ -98,7 +98,8 @@ class PlayState extends Phaser.State {
 
     this.physics.enable(apple)
     let appleImg = this.cache.getImage(type)
-    apple.width = this.world.width / 8
+    apple.width = Math.min(Math.max(this.world.width / 6, 70), 150)
+    console.log(apple.width)
     apple.height = apple.width / appleImg.width * appleImg.height
 
     apple.body.collideWorldBounds = true
@@ -106,7 +107,7 @@ class PlayState extends Phaser.State {
     apple.body.onWorldBounds.add((apple, up, down, left, right) => {
       if (down) {
         apple.kill()
-        if (apple.type !== 'bomb') {
+        if (apple.type !== 'bomb' && apple.type !== 'bomb2') {
           this.bgMusic.destroy()
           this.state.start('EndState', true, false, this.score)
         }
@@ -114,13 +115,13 @@ class PlayState extends Phaser.State {
     })
   }
   pickApple = (man, apple) => {
-    if (apple.type === 'bomb') {
+    if (apple.type === 'bomb' || apple.type === 'bomb2') {
       this.bombMusic.play()
       this.bgMusic.destroy()
       this.state.start('EndState', true, false, this.score)
     } else {
-      let point = apple.type === 'yellow' ? 5 : (apple.type === 'red' ? 3 : 1)
-      let img = apple.type === 'five' ? 'five' : (apple.type === 'three' ? 'three' : 'one')
+      let point = apple.type === ('special1' || 'special2') ? 5 : (apple.type === ('red' || 'yellow') ? 3 : 1)
+      let img = apple.type === ('special1' || 'special2') ? 'five' : (apple.type === ('red' || 'yellow') ? 'three' : 'one')
 
       let goal = this.add.image(apple.x, apple.y, img)
       let goalImg = this.cache.getImage(img)

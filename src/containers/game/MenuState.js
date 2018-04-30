@@ -1,11 +1,5 @@
 import Phaser from 'phaser-ce'
-import WebFont from 'webfontloader'
 
-let WebFontConfig = {
-  google: {
-    families: ['Press Start 2P']
-  }
-}
 class MenuState extends Phaser.State {
   preload () {
     console.log('preloading...', window.devicePixelRatio)
@@ -38,7 +32,7 @@ class MenuState extends Phaser.State {
     });
     remind.anchor.setTo(0.5, 0.5)
 
-    let man = this.add.sprite(this.world.centerX, this.world.height * 0.9, 'dude')
+    let man = this.add.sprite(this.world.centerX, this.world.height * 0.86, 'dude')
     let manImage = this.cache.getImage('dude')
     man.width = this.world.width * 0.2
     man.height = man.width / manImage.width * manImage.height
