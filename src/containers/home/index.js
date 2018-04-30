@@ -12,13 +12,19 @@ const Cell = styled.div`
   height: 100vh;
   background-image: url(${prop => prop.bgSrc ? prop.bgSrc : ''});
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
 
   color: white;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+    color: #50514F;
+  }
 `
 const Button = styled.div`
   width: auto;
@@ -39,11 +45,6 @@ const Button = styled.div`
   justify-content: center;
 
   transition: all 0.25s ease;
-
-  > a {
-    text-decoration: none;
-    color: #50514F;
-  }
 `
 export default class Home extends React.Component {
   constructor(props) {
@@ -113,9 +114,11 @@ export default class Home extends React.Component {
         <Cell bgSrc={require(`../../assets/images/bg3.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg4.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg5.png`)} >
-          <Button color={'linear-gradient(315deg, #F3F599 0%, #F3F599 74%)'}>
-            <Link to="/game">開始遊戲</Link>
-          </Button>
+          <Link to="/game">
+            <Button color={'linear-gradient(315deg, #F3F599 0%, #F3F599 74%)'}>
+              開始遊戲
+            </Button>
+          </Link>
         </Cell>
       </Swiper>
     )

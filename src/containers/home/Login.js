@@ -28,7 +28,8 @@ const Container = styled.div`
 
   background-image: url(${prop => prop.bgSrc ? prop.bgSrc : ''});
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
 `
 const Header = styled.div``
 const Body = styled.div`
