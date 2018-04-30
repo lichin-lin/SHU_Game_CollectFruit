@@ -20,6 +20,31 @@ const Cell = styled.div`
   align-items: center;
   justify-content: center;
 `
+const Button = styled.div`
+  width: auto;
+  min-width: 200px;
+  background-color: #89d8d3;
+  background-image: ${props => props.color};
+  padding: 10px 25px;
+
+  border-color: #e1fff0;
+  border-radius: 5px;
+  color: #50514F;
+  font-size: 24px;
+  outline: none;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.25s ease;
+
+  > a {
+    text-decoration: none;
+    color: #50514F;
+  }
+`
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -30,11 +55,10 @@ export default class Home extends React.Component {
     user: null,
     isLoading: true,
     isLogin: false,
-    isSwipe: false
+    noSwiping: true
   }
   onSwipe = () => {
-    console.log('->', this.swiper)
-    this.setState({isSwipe: true})
+    this.setState({noSwiping: false})
     if (this.swiper) this.swiper.slideNext()
   }
 
@@ -71,7 +95,6 @@ export default class Home extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     const params = {
       navigation: {
         // nextEl: '.swiper-button-next',
@@ -82,17 +105,17 @@ export default class Home extends React.Component {
       <Swiper
         {...params}
         ref={node => this.swiper = node !== null ? node.swiper : null }
-        noSwiping={this.state.isSwipe}>
+        noSwiping={this.state.noSwiping}>
         <Cell>
-          {/* { !this.state.startGame ?  :  <Game />} */}
           <Login isLoading={this.state.isLoading} isLogin={this.state.isLogin} onSwipe={this.onSwipe}/>
         </Cell>
-        <Cell bgSrc={require(`../../assets/images/bg1.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg2.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg3.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg4.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg5.png`)} >
-          <Link to="/game">About</Link>
+          <Button color={'linear-gradient(315deg, #F3F599 0%, #F3F599 74%)'}>
+            <Link to="/game">開始遊戲</Link>
+          </Button>
         </Cell>
       </Swiper>
     )
