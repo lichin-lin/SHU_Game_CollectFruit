@@ -42,7 +42,7 @@ class PlayState extends Phaser.State {
     this.title = this.add.text(this.world.centerX, this.world.height * 0.25, '0', {
         fontSize: '40px',
         fontWeight: 'bold',
-        fill: '#f2bb15'
+        fill: '#50514F'
     })
     this.title.anchor.setTo(0.5, 0.5)
 

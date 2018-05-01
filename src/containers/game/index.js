@@ -18,7 +18,7 @@ class gameContainer extends React.Component {
   async componentDidMount () {
     const cookies = new Cookies()
     let checkUser = cookies.get('user')
-    if (checkUser !== null && checkUser !== undefined) {
+    if (true || (checkUser !== null && checkUser !== undefined)) {
       await this.setState({
         game: new Phaser.Game(width, height, Phaser.AUTO, '#game')
       })
