@@ -45,7 +45,7 @@ class EndState extends Phaser.State {
     let title = this.add.text(this.world.centerX, this.world.height * 0.5, '遊戲結束', {
         fontSize: '40px',
         fontWeight: 'bold',
-        fill: '#f2bb15'
+        fill: '#50514F'
     })
     title.anchor.setTo(0.5, 0.5)
 
@@ -53,21 +53,21 @@ class EndState extends Phaser.State {
     let scoreText = this.add.text(this.world.centerX, this.world.height * 0.6, scoreStr, {
         fontSize: '30px',
         fontWeight: 'bold',
-        fill: '#f2bb15'
+        fill: '#50514F'
     })
     scoreText.anchor.setTo(0.5, 0.5)
 
     let remind = this.add.text(this.world.centerX, this.world.height * 0.65, '點擊螢幕以分享', {
         fontSize: '20px',
         fontWeight: 'bold',
-        fill: '#f2bb15'
+        fill: '#50514F'
     })
     remind.anchor.setTo(0.5, 0.5)
 
     let scoreBoardTitle = this.add.text(this.world.centerX, this.world.height * 0.1, '排行榜', {
         fontSize: '30px',
         fontWeight: 'bold',
-        fill: '#f2bb15'
+        fill: '#50514F'
     })
     scoreBoardTitle.anchor.setTo(0.5, 0.5)
 
@@ -75,7 +75,7 @@ class EndState extends Phaser.State {
       let record = this.add.text(this.world.centerX, this.world.height * 0.15, `${i+1}. ${data.score} - ${data.name}`, {
           fontSize: '16px',
           fontWeight: 'bold',
-          fill: '#f2bb15'
+          fill: '#50514F'
       })
       record.anchor.setTo(0.5, 0.5 - i)
     })

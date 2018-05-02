@@ -35,7 +35,7 @@ const Button = styled.div`
 
   border-color: #e1fff0;
   border-radius: 5px;
-  color: #50514F;
+  color: white;
   font-size: 24px;
   outline: none;
 
@@ -115,7 +115,7 @@ export default class Home extends React.Component {
         <Cell bgSrc={require(`../../assets/images/bg4.png`)} />
         <Cell bgSrc={require(`../../assets/images/bg5.png`)} >
           <Link to="/game">
-            <Button color={'linear-gradient(315deg, #F3F599 0%, #F3F599 74%)'}>
+            <Button color={'linear-gradient(315deg, #485993 0%, #485993 74%)'}>
               開始遊戲
             </Button>
           </Link>
