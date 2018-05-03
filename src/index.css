@@ -2,4 +2,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
+}
+
+canvas {
+  width: calc(100vh * 9 / 16) !important;
+  height: 100vh !important;
 }

@@ -8,8 +8,8 @@ import EndState from './EndState'
 import Cookies from 'universal-cookie'
 import { withRouter } from 'react-router-dom'
 
-let width = window.innerWidth
-let height = window.innerHeight
+let gameWidth = window.innerWidth;
+let gameHeight = window.innerHeight;
 
 class gameContainer extends React.Component {
   state = {
@@ -20,7 +20,7 @@ class gameContainer extends React.Component {
     let checkUser = cookies.get('user')
     if (true || (checkUser !== null && checkUser !== undefined)) {
       await this.setState({
-        game: new Phaser.Game(width, height, Phaser.AUTO, '#game')
+        game: new Phaser.Game(gameHeight * 9 / 16, gameHeight, Phaser.AUTO, 'game')
       })
       this.state.game.state.add('BootState', BootState)
       this.state.game.state.add('MenuState', MenuState)
@@ -33,7 +33,7 @@ class gameContainer extends React.Component {
     }
   }
   render () {
-    return null
+    return <div id="game"></div>
   }
 }
 
