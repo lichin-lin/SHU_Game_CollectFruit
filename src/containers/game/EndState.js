@@ -82,9 +82,10 @@ class EndState extends Phaser.State {
 
     // onInputUp
     this.input.onTap.add(() => {
+      let title = '#風兒風兒'
       let url = 'https://2018shupradmooju.surge.sh'
       let quote = `我在2018世新公廣畢展豐年號展間拿下了 ${this.score} 分，換你來挑戰！點入網址瘋狂吃果乾: https://shopee.tw/fongnian2017`
-      window.open(`https://www.facebook.com/sharer/sharer.php?quote=${quote}&u=${url}`)
+      window.open(`https://www.facebook.com/sharer/sharer.php?quote=${quote}&u=${url}&title=${title}&`)
       this.state.start('MenuState')
     })
   }
