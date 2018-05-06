@@ -6,13 +6,16 @@ body {
 }
 
 canvas {
-  width: calc(100vh * 9 / 16) !important;
-  height: 100vh !important;
+  /* width: calc(100vh * 9 / 16) !important;
+  height: 100vh !important; */
+
+  width: 100% !important;
+  height: 100% !important;
 }
 
-@supports (-webkit-overflow-scrolling: touch) {
+/* @supports (-webkit-overflow-scrolling: touch) {
   canvas {
     width: calc((100vh - 64px) * 9 / 16) !important;
     height: calc(100vh - 84px) !important;
   }
-}
+} */

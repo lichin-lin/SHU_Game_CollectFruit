@@ -12,6 +12,11 @@ const Wrapper = styled.div`
 const Main = styled.main`
   width: calc(100vh * 9 / 16);
   height: 100vh;
+
+  @supports (-webkit-overflow-scrolling: touch) {
+    width: calc((100vh - 64px) * 9 / 16);
+    height: calc(100vh - 84px);
+  }
 `
 
 const App = () => (

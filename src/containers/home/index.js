@@ -25,6 +25,11 @@ const Cell = styled.div`
     text-decoration: none;
     color: #50514F;
   }
+
+  @supports (-webkit-overflow-scrolling: touch) {
+    width: 100%;
+    height: calc(100vh - 84px);
+  }
 `
 const Button = styled.div`
   width: auto;
