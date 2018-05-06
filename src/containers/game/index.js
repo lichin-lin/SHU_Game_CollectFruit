@@ -4,13 +4,21 @@ import BootState from './BootState'
 import MenuState from './MenuState'
 import PlayState from './PlayState'
 import EndState from './EndState'
+import styled from 'styled-components'
 
 import Cookies from 'universal-cookie'
 import { withRouter } from 'react-router-dom'
 
-let gameWidth = window.innerWidth;
-let gameHeight = window.innerHeight;
+// let gameWidth = window.innerWidth;
+let gameHeight = Math.max(window.innerHeight, document.documentElement.clientHeight)
 
+const GameContent = styled.div`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+`
 class gameContainer extends React.Component {
   state = {
     game: null
@@ -33,7 +41,7 @@ class gameContainer extends React.Component {
     }
   }
   render () {
-    return <div id="game"></div>
+    return <GameContent id="game"></GameContent>
   }
 }
 

@@ -38,7 +38,7 @@ class EndState extends Phaser.State {
     })
     this.scoreBoard = _.sortBy(this.scoreBoard, (d) => d.score).reverse().slice(0, 5)
 
-    let bg = this.add.image(0, 0, 'bg')
+    let bg = this.add.image(0, 0, 'bg-game')
     bg.width = this.world.width
     bg.height = this.world.height
 
@@ -70,7 +70,7 @@ class EndState extends Phaser.State {
         fill: '#50514F'
     })
     scoreBoardTitle.anchor.setTo(0.5, 0.5)
-
+    // eslint-disable-next-line
     this.scoreBoard.map((data, i) => {
       let record = this.add.text(this.world.centerX, this.world.height * 0.15, `${i+1}. ${data.score} - ${data.name}`, {
           fontSize: '16px',

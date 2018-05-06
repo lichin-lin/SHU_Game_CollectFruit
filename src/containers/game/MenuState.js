@@ -13,10 +13,9 @@ class MenuState extends Phaser.State {
   }
 
   create() {
-    let bg = this.add.image(0, 0, 'bg')
+    let bg = this.add.image(0, 0, 'bg-game')
     bg.width = this.world.width
     bg.height = this.world.height
-
     let remind = this.add.text(this.world.centerX, this.world.centerY, '點擊螢幕開始遊戲!', {
         fontSize: '24px',
         font: 'Press Start 2P',

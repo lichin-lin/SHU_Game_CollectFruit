@@ -27,7 +27,7 @@ class PlayState extends Phaser.State {
     this.scoreMusic = this.add.audio('scoreMusic')
     this.bombMusic = this.add.audio('bombMusic')
 
-    let bg = this.add.image(0, 0, 'bg')
+    let bg = this.add.image(0, 0, 'bg-game')
     bg.width = this.world.width
     bg.height = this.world.height
 

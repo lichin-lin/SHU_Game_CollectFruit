@@ -3,7 +3,7 @@ import WebFont from 'webfontloader'
 
 let gameWidth = window.innerWidth;
 let gameHeight = window.innerHeight;
-let images = ['bg', 'dude', 'green', 'red', 'yellow', 'special1', 'special2', 'bomb', 'bomb2', 'five', 'three', 'one'];
+let images = ['bg-game', 'dude', 'green', 'red', 'yellow', 'special1', 'special2', 'bomb', 'bomb2', 'five', 'three', 'one'];
 let audios = ['bgMusic', 'scoreMusic', 'bombMusic'];
 
 class BootState extends Phaser.State {
