@@ -6,11 +6,8 @@ body {
 }
 
 canvas {
-  /* width: calc(100vh * 9 / 16) !important;
-  height: 100vh !important; */
-
-  width: 100% !important;
-  height: 100% !important;
+  /* width: 100% !important; */
+  /* height: 100% !important; */
 }
 
 /* @supports (-webkit-overflow-scrolling: touch) {

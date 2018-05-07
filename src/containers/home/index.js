@@ -5,6 +5,7 @@ import Swiper from 'react-id-swiper'
 import styled from 'styled-components'
 import Cookies from 'universal-cookie'
 
+import {isMobile} from 'react-device-detect'
 import { Link } from 'react-router-dom'
 
 const Cell = styled.div`
@@ -26,9 +27,13 @@ const Cell = styled.div`
     color: #50514F;
   }
 
-  @supports (-webkit-overflow-scrolling: touch) {
+  /* @supports (-webkit-overflow-scrolling: touch) {
     width: 100%;
     height: calc(100vh - 84px);
+  } */
+  &.modify {
+    width: calc(100vh * 9 / 16);
+    height: calc(100vh);
   }
 `
 const Button = styled.div`
@@ -112,13 +117,21 @@ export default class Home extends React.Component {
         {...params}
         ref={node => this.swiper = node !== null ? node.swiper : null }
         noSwiping={this.state.noSwiping}>
-        <Cell>
+        <Cell className={isMobile ? null : 'modify'}>
           <Login isLoading={this.state.isLoading} isLogin={this.state.isLogin} onSwipe={this.onSwipe}/>
         </Cell>
-        <Cell bgSrc={require(`../../assets/images/bg2.png`)} />
-        <Cell bgSrc={require(`../../assets/images/bg3.png`)} />
-        <Cell bgSrc={require(`../../assets/images/bg4.png`)} />
-        <Cell bgSrc={require(`../../assets/images/bg5.png`)} >
+        <Cell
+          className={isMobile ? null : 'modify'}
+          bgSrc={require(`../../assets/images/bg2.png`)} />
+        <Cell
+          className={isMobile ? null : 'modify'}
+          bgSrc={require(`../../assets/images/bg3.png`)} />
+        <Cell
+          className={isMobile ? null : 'modify'}
+          bgSrc={require(`../../assets/images/bg4.png`)} />
+        <Cell
+          className={isMobile ? null : 'modify'}
+          bgSrc={require(`../../assets/images/bg5.png`)} >
           <Link to="/game">
             <Button color={'linear-gradient(315deg, #485993 0%, #485993 74%)'}>
               開始遊戲
