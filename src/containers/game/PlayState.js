@@ -31,9 +31,9 @@ class PlayState extends Phaser.State {
     bg.width = this.world.width
     bg.height = this.world.height
 
-    this.man = this.add.sprite(this.world.centerX, this.world.height * 0.86, 'dude')
-    let manImage = this.cache.getImage('dude')
-    this.man.width = this.world.width * 0.2
+    this.man = this.add.sprite(this.world.centerX, this.world.height * 0.86, 'dude1-3x')
+    let manImage = this.cache.getImage('dude1-3x')
+    this.man.width = 80
     this.man.height = this.man.width / manImage.width * manImage.height
     this.man.anchor.setTo(0.5, 0.5)
     this.physics.enable(this.man)
