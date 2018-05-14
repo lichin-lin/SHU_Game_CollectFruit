@@ -4,16 +4,18 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import ReactLoading from 'react-loading'
 
-import {
-  fblogin
-} from '../../modules/session'
+import { fblogin } from '../../modules/session'
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fblogin
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fblogin,
+    },
+    dispatch
+  )
 
 const mapStateToProps = state => ({
-  account: state.session.account
+  account: state.session.account,
 })
 
 const Container = styled.div`
@@ -26,7 +28,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  background-image: url(${prop => prop.bgSrc ? prop.bgSrc : ''});
+  background-image: url(${prop => (prop.bgSrc ? prop.bgSrc : '')});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -89,29 +91,35 @@ class Login extends React.Component {
   onLogin = () => {
     this.props.fblogin()
   }
-  render () {
+  render() {
     return (
       <Container bgSrc={require(`../../assets/images/bg1.png`)}>
-        <Header/>
+        <Header />
         <Body color={'linear-gradient(315deg, #485993 0%, #485993 74%);'}>
-          <div onClick={this.props.isLogin ? this.props.onSwipe : this.props.fblogin}>
-            {
-              this.props.isLoading ? (
-                <ReactLoading type={'spin'} color={'white'} height={30} width={30} />
-              ) : (
-                this.props.isLogin ? `開始介紹遊戲` : `使用 facebook 登入`
-              )
+          <div
+            onClick={
+              this.props.isLogin ? this.props.onSwipe : this.props.fblogin
             }
+          >
+            {this.props.isLoading ? (
+              <ReactLoading
+                type={'spin'}
+                color={'white'}
+                height={30}
+                width={30}
+              />
+            ) : this.props.isLogin ? (
+              `開始介紹遊戲`
+            ) : (
+              `使用 facebook 登入`
+            )}
           </div>
           {/* <h3>{this.props.isLogin ? `#2018世新公廣展 #MooJu目啾整合行銷` : ``}</h3> */}
         </Body>
-        <Footer/>
+        <Footer />
       </Container>
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -10,5 +10,5 @@ export default combineReducers({
   firebaseStateReducer,
   counter,
   game,
-  session
+  session,
 })

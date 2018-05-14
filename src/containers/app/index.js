@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import { Route } from 'react-router-dom'
 import Home from '../home'
 import About from '../about'
 import styled from 'styled-components'
 
-import {isMobile} from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,4 +39,4 @@ const App = () => (
   </Wrapper>
 )
 
-export default App;
+export default App

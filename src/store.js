@@ -14,15 +14,12 @@ const firebaseConfig = {
   databaseURL: 'https://shu-pc-game.firebaseio.com',
   projectId: 'shu-pc-game',
   storageBucket: '',
-  messagingSenderId: '1057040115385'
+  messagingSenderId: '1057040115385',
 }
 
 const initialState = {}
 const enhancers = []
-const middleware = [
-  thunk,
-  routerMiddleware(history)
-]
+const middleware = [thunk, routerMiddleware(history)]
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__
@@ -39,10 +36,6 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  composedEnhancers
-)
+const store = createStore(rootReducer, initialState, composedEnhancers)
 
 export default store

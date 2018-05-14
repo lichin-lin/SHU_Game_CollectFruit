@@ -1,8 +1,7 @@
 import Phaser from 'phaser-ce'
 
 class PlayState extends Phaser.State {
-
-  init () {
+  init() {
     this.man = null
     this.apples = null
     this.score = 0
@@ -15,7 +14,7 @@ class PlayState extends Phaser.State {
     this.isState4 = false
   }
 
-  create () {
+  create() {
     this.score = 0
     this.physics.startSystem(Phaser.Physics.Arcade)
     this.physics.arcade.gravity.y = 300
@@ -31,7 +30,11 @@ class PlayState extends Phaser.State {
     bg.width = this.world.width
     bg.height = this.world.height
 
-    this.man = this.add.sprite(this.world.centerX, this.world.height * 0.86, 'dude1-3x')
+    this.man = this.add.sprite(
+      this.world.centerX,
+      this.world.height * 0.86,
+      'dude1-3x'
+    )
     let manImage = this.cache.getImage('dude1-3x')
     this.man.width = 80
     this.man.height = this.man.width / manImage.width * manImage.height
@@ -39,22 +42,27 @@ class PlayState extends Phaser.State {
     this.physics.enable(this.man)
     this.man.body.allowGravity = false
 
-    this.title = this.add.text(this.world.centerX, this.world.height * 0.25, '0', {
+    this.title = this.add.text(
+      this.world.centerX,
+      this.world.height * 0.25,
+      '0',
+      {
         fontSize: '40px',
         fontWeight: 'bold',
-        fill: '#50514F'
-    })
+        fill: '#50514F',
+      }
+    )
     this.title.anchor.setTo(0.5, 0.5)
 
     let touching = false
-    this.input.onDown.add((pointer) => {
+    this.input.onDown.add(pointer => {
       if (Math.abs(pointer.x - this.man.x) < this.man.width / 2) touching = true
     })
 
-    this.input.onUp.add(() => touching = false);
+    this.input.onUp.add(() => (touching = false))
 
     this.input.addMoveCallback((pointer, x, y, isTap) => {
-        if (!isTap && touching) this.man.x = x
+      if (!isTap && touching) this.man.x = x
     })
 
     this.apples = this.add.group()
@@ -65,8 +73,14 @@ class PlayState extends Phaser.State {
     this.appleTimer.start()
   }
 
-  update () {
-    this.physics.arcade.overlap(this.man, this.apples, this.pickApple, null, this)
+  update() {
+    this.physics.arcade.overlap(
+      this.man,
+      this.apples,
+      this.pickApple,
+      null,
+      this
+    )
     this.physics.arcade.gravity.y = this.score > 20 ? this.score * 30 : 300
     if (this.score > 20 && !this.isState2) {
       this.appleTimer.destroy()
@@ -80,7 +94,12 @@ class PlayState extends Phaser.State {
       this.appleTimer.loop(400, this.objFalling)
       this.appleTimer.start()
       this.isState3 = true
-    } else if (this.score > 100 && this.isState2 && this.isState3 && !this.isState4) {
+    } else if (
+      this.score > 100 &&
+      this.isState2 &&
+      this.isState3 &&
+      !this.isState4
+    ) {
       this.appleTimer.destroy()
       this.appleTimer = this.time.create(true)
       this.appleTimer.loop(300, this.objFalling)
@@ -89,7 +108,15 @@ class PlayState extends Phaser.State {
     }
   }
   objFalling = () => {
-    let appleTypes = ['green', 'red', 'yellow', 'special1', 'special2', 'bomb', 'bomb2']
+    let appleTypes = [
+      'green',
+      'red',
+      'yellow',
+      'special1',
+      'special2',
+      'bomb',
+      'bomb2',
+    ]
     let x = Math.random() * this.world.width
     let index = Math.floor(Math.random() * appleTypes.length)
     let type = appleTypes[index]
@@ -120,8 +147,18 @@ class PlayState extends Phaser.State {
       this.bgMusic.destroy()
       this.state.start('EndState', true, false, this.score)
     } else {
-      let point = apple.type === ('special1' || 'special2') ? 5 : (apple.type === ('red' || 'yellow') ? 3 : 1)
-      let img = apple.type === ('special1' || 'special2') ? 'five' : (apple.type === ('red' || 'yellow') ? 'three' : 'one')
+      let point =
+        apple.type === ('special1' || 'special2')
+          ? 5
+          : apple.type === ('red' || 'yellow')
+            ? 3
+            : 1
+      let img =
+        apple.type === ('special1' || 'special2')
+          ? 'five'
+          : apple.type === ('red' || 'yellow')
+            ? 'three'
+            : 'one'
 
       let goal = this.add.image(apple.x, apple.y, img)
       let goalImg = this.cache.getImage(img)
@@ -129,19 +166,35 @@ class PlayState extends Phaser.State {
       goal.height = goal.width / (goalImg.width / goalImg.height)
       goal.alpha = 0
 
-      let showTween = this.add.tween(goal).to({
+      let showTween = this.add.tween(goal).to(
+        {
           alpha: 1,
-          y: goal.y - 20
-      }, 100, Phaser.Easing.Linear.None, true, 0, 0, false)
+          y: goal.y - 20,
+        },
+        100,
+        Phaser.Easing.Linear.None,
+        true,
+        0,
+        0,
+        false
+      )
 
       showTween.onComplete.add(() => {
-          let hideTween = this.add.tween(goal).to({
-              alpha: 0,
-              y: goal.y - 20
-          }, 100, Phaser.Easing.Linear.None, true, 200, 0, false)
-          hideTween.onComplete.add(() => {
-              goal.kill()
-          })
+        let hideTween = this.add.tween(goal).to(
+          {
+            alpha: 0,
+            y: goal.y - 20,
+          },
+          100,
+          Phaser.Easing.Linear.None,
+          true,
+          200,
+          0,
+          false
+        )
+        hideTween.onComplete.add(() => {
+          goal.kill()
+        })
       })
       this.score += point
       this.title.text = this.score

@@ -10,7 +10,10 @@ import Cookies from 'universal-cookie'
 import { withRouter } from 'react-router-dom'
 
 // let gameWidth = window.innerWidth;
-let gameHeight = Math.max(window.innerHeight, document.documentElement.clientHeight)
+let gameHeight = Math.max(
+  window.innerHeight,
+  document.documentElement.clientHeight
+)
 
 const GameContent = styled.div`
   display: flex;
@@ -21,14 +24,19 @@ const GameContent = styled.div`
 `
 class gameContainer extends React.Component {
   state = {
-    game: null
+    game: null,
   }
-  async componentDidMount () {
+  async componentDidMount() {
     const cookies = new Cookies()
     let checkUser = cookies.get('user')
     if (true || (checkUser !== null && checkUser !== undefined)) {
       await this.setState({
-        game: new Phaser.Game(gameHeight * 9 / 16, gameHeight, Phaser.AUTO, 'game')
+        game: new Phaser.Game(
+          gameHeight * 9 / 16,
+          gameHeight,
+          Phaser.AUTO,
+          'game'
+        ),
       })
       this.state.game.state.add('BootState', BootState)
       this.state.game.state.add('MenuState', MenuState)
@@ -40,8 +48,8 @@ class gameContainer extends React.Component {
       this.props.history.push('/')
     }
   }
-  render () {
-    return <GameContent id="game"></GameContent>
+  render() {
+    return <GameContent id="game" />
   }
 }
 
