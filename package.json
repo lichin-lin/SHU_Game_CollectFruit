@@ -1,7 +1,6 @@
 {
   "name": "shu-pickfruit",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "firebase": "^4.13.1",
     "history": "^4.7.2",
